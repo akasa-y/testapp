@@ -21,12 +21,14 @@ int main(int argc, char *argv[])
     while(1)
     {
         fgets(line, 32, stdin);
-        if(strlen(line) == 1)
+        memset(mail_data.mail_data.message, 0, sizeof(mail_data.mail_data.message));
+        strncpy(mail_data.mail_data.message, line, strlen(line) -1);
+        send_mail(0, &mail_data);
+        send_mail(1, &mail_data);
+        if(strcmp(mail_data.mail_data.message, "end") == 0)
         {
             break;
         }
-        strcpy(mail_data.mail_data.message, line);
-        send_mail(1, &mail_data);
     }
 
     term_multi_task();

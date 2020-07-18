@@ -48,6 +48,17 @@ int init_multi_task()
 
 int term_multi_task()
 {
+    int i;
+    int ret;
+    for(i = 0; i < 2; i++)
+    {
+        ret = pthread_join(thdata[i].th, NULL);
+        if(ret != 0)
+        {
+            printf("join err %d\n", i);
+        }
+    }
+
     free(thdata);
     thdata = NULL;
 
