@@ -40,8 +40,6 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    scanf("%d", &count);    
-
     ret = pthread_create(&thdata[0].th, NULL, thread_func1, &thdata[0]);
     ret += pthread_create(&thdata[1].th, NULL, thread_func2, &thdata[1]);
     if(ret != 0)
