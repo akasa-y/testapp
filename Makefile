@@ -1,4 +1,3 @@
-CC = gcc
 CFLAGS = -Wall -O0 -g -I$(PWD)/include
 LDFLAGS = 
 OBJS = main.o sub1/sub1.o sub2/sub2.o
@@ -6,8 +5,9 @@ HEADER = common.h
 OUTPUT = testapp
 
 ifdef ITRON
-OBJS += 
+OBJS += itron/os_api.o
 else
+CC = gcc
 OBJS += linux/os_api.o
 LDFLAGS += -lpthread
 endif
