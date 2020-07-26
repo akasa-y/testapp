@@ -10,6 +10,7 @@ else
 CC = gcc
 OBJS += linux/os_api.o
 LDFLAGS += -lpthread
+HEADER += linux_only.h
 endif
 
 $(OUTPUT) : $(OBJS)

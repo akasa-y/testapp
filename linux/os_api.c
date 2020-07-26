@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <pthread.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -25,6 +26,11 @@ int mailbox_fd[2][2];
 /* ROM */
 const char *mailbox_filename[2] = {"/tmp/sub1_mailbox", "/tmp/sub2_mailbox"};
 
+int init_hw()
+{
+    return 0;
+}
+
 int init_multi_task()
 {
     int ret;
@@ -36,8 +42,8 @@ int init_multi_task()
         return -1;
     }
 
-    ret = pthread_create(&thdata[0].th, NULL, func1_main, &thdata[0]);
-    ret += pthread_create(&thdata[1].th, NULL, func2_main, &thdata[1]);
+    ret = pthread_create(&thdata[0].th, NULL, sub1, &thdata[0]);
+    ret += pthread_create(&thdata[1].th, NULL, sub2, &thdata[1]);
     if(ret != 0)
     {
         perror("init pthread_create");
@@ -128,4 +134,31 @@ int recv_mail(int mailbox_id, mail_data_u *data)
         printf("read err\n");
     }
     return ret;
+}
+
+int read_line(char *line)
+{
+    char *c;
+    fgets(line, 32, stdin);
+
+    c = strchr(line, '\n');
+    if(c)
+    {
+        *c = 0;
+    }
+    return strlen(line);
+}
+
+int syslog_msk_log(unsigned int  logmask, unsigned int lowmask)
+{
+    return 0;
+}
+
+void syslog(unsigned int prio, const char *format, ...)
+{
+    va_list ap;
+
+    va_start(ap, format);
+    vprintf(format, ap);
+    va_end(ap);
 }

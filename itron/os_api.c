@@ -3,14 +3,44 @@
 #include <t_syslog.h>
 #include <string.h>
 #include "syssvc/syslog.h"
+#include "syssvc/serial.h"
 
 #include "common.h"
+#include "os_api.h"
 
 /* Typedef */
 
 /* RAM */
 
 /* ROM */
+
+Inline void
+svc_perror(const char *file, int_t line, const char *expr, ER ercd)
+{
+	if (ercd < 0) {
+		t_perror(LOG_ERROR, file, line, expr, ercd);
+	}
+}
+
+#define	SVC_PERROR(expr)	svc_perror(__FILE__, __LINE__, #expr, (expr))
+
+static int init_serial()
+{
+    ER_UINT	ercd;
+	ercd = serial_opn_por(TASK_PORTID);
+	if (ercd < 0 && MERCD(ercd) != E_OBJ) {
+		syslog(LOG_ERROR, "%s (%d) reported by `serial_opn_por'.",
+									itron_strerror(ercd), SERCD(ercd));
+	}
+	SVC_PERROR(serial_ctl_por(TASK_PORTID,
+							(IOCTL_CRLF | IOCTL_FCSND | IOCTL_FCRCV)));
+    return 0;
+}
+
+int init_hw()
+{
+    return init_serial();
+}
 
 int init_multi_task()
 {
@@ -72,4 +102,28 @@ int recv_mail(int mailbox_id, mail_data_u *data)
     rel_mpf(MPF_DTQ, mpf);
 
     return 0;
+}
+
+int read_line(char *line)
+{
+    int i = 0;
+    char c;
+
+    while(i < 256)
+    {
+//        syslog(LOG_NOTICE, "in read_line");
+        serial_rea_dat(TASK_PORTID, &c, 1);
+//        syslog(LOG_NOTICE, "read_line get %x", c, c);
+        if(c == 0xd)
+        {
+            line[i] = 0;
+            break;
+        }
+        else
+        {
+            line[i++] = c;
+        }
+    }
+//    syslog(LOG_NOTICE, "read_line done %s, %d", line, i);
+    return i;
 }
