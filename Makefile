@@ -1,6 +1,6 @@
 CFLAGS = -Wall -O0 -g -I$(PWD)/include
 LDFLAGS = 
-OBJS = main.o sub1/sub1.o sub2/sub2.o
+OBJS = testapp.o sub1/sub1.o sub2/sub2.o
 HEADER = common.h
 OUTPUT = testapp
 
