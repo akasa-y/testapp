@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
         read_line(line);
         memset(mail_data.mail_data.message, 0, sizeof(mail_data.mail_data.message));
         strncpy(mail_data.mail_data.message, line, strlen(line));
-        send_mail(0, &mail_data);
-        send_mail(1, &mail_data);
+        send_mail(MAILBOX_SUB1, &mail_data);
+        send_mail(MAILBOX_SUB2, &mail_data);
         if(strcmp(mail_data.mail_data.message, "end") == 0)
         {
             break;

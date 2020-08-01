@@ -10,4 +10,8 @@
 #define	TASK_PORTID		1			/* 文字入力するシリアルポートID */
 #endif /* TASK_PORTID */
 
+#define MAILBOX_MAIN DTQ_MAIN
+#define MAILBOX_SUB1 DTQ_SUB1
+#define MAILBOX_SUB2 DTQ_SUB2
+
 #endif

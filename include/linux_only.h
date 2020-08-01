@@ -20,4 +20,8 @@
 int syslog_msk_log(unsigned int  logmask, unsigned int lowmask);
 void syslog(unsigned int prio, const char *format, ...);
 
+#define MAILBOX_MAIN 99
+#define MAILBOX_SUB1 0
+#define MAILBOX_SUB2 1
+
 #endif

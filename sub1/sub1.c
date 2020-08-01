@@ -13,7 +13,8 @@ void *sub1(void *thdata)
 
     while(1)
     {
-        recv_mail(0, &mail_data);
+        memset(&mail_data, 0, sizeof(mail_data));
+        recv_mail(MAILBOX_SUB1, &mail_data);
         syslog(LOG_NOTICE,"fun1 recv %s\n", mail_data.mail_data.message);
 
         if(strcmp(mail_data.mail_data.message, "end") == 0)
@@ -23,9 +24,9 @@ void *sub1(void *thdata)
         mail_data.mail_data.header.send_task_id = 0;
         mail_data.mail_data.header.recv_task_id = 1;
         mail_data.mail_data.header.message_id = 0;
-
-        strcat(mail_data.mail_data.message, " from1");
-        send_mail(1, &mail_data);
+        
+        syslog(LOG_NOTICE,"fun1 send %s\n", mail_data.mail_data.message);
+        send_mail(MAILBOX_SUB2, &mail_data);
     }
 #ifdef ITRON
     return;
@@ -33,3 +34,4 @@ void *sub1(void *thdata)
     return NULL;
 #endif
 }
+

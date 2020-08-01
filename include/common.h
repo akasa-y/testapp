@@ -16,7 +16,7 @@ typedef struct {
 
 typedef struct {
     mail_header_t header;
-    char message[28];
+    char message[60];
 } mail_data_t;
 
 typedef union {

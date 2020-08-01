@@ -13,7 +13,8 @@ void *sub2(void *thdata)
 
     while(1)
     {
-        recv_mail(1, &mail_data);
+        memset(&mail_data, 0, sizeof(mail_data));
+        recv_mail(MAILBOX_SUB2, &mail_data);
         syslog(LOG_NOTICE,"fun2 recv %s\n", mail_data.mail_data.message);
 
         if(strcmp(mail_data.mail_data.message, "end") == 0)
