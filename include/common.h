@@ -2,6 +2,7 @@
 #define __COMMON_H__
 
 #ifdef ITRON
+#include "itron_only.h"
 #else
 #include "linux_only.h"
 #endif

@@ -1,10 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
+//#include <stdio.h>
+//#include <stdlib.h>
 #include <string.h>
 
 #include "common.h"
 
+#ifdef ITRON
+void main_task(intptr_t exinf)
+#else
 int main(int argc, char *argv[])
+#endif
 {
     char line[32];
     mail_data_u mail_data;

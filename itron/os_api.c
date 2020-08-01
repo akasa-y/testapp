@@ -6,7 +6,6 @@
 #include "syssvc/serial.h"
 
 #include "common.h"
-#include "os_api.h"
 
 /* Typedef */
 
