@@ -1,6 +1,12 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
+#ifdef ITRON
+#include "itron_only.h"
+#else
+#include "linux_only.h"
+#endif
+
 typedef struct {
     unsigned char send_task_id;
     unsigned char recv_task_id;
@@ -10,7 +16,7 @@ typedef struct {
 
 typedef struct {
     mail_header_t header;
-    char message[28];
+    char message[60];
 } mail_data_t;
 
 typedef union {
@@ -18,6 +24,7 @@ typedef union {
     mail_data_t mail_data;
 } mail_data_u;
 
+int init_hw();
 int init_multi_task();
 int term_multi_task();
 int init_mailbox();
@@ -26,7 +33,15 @@ int term_mailbox();
 int send_mail(int mailbox_id, mail_data_u *data);
 int recv_mail(int mailbox_id, mail_data_u *data);
 
-void *func1_main(void *thdata);
-void *func2_main(void *thdata);
+int read_line(char *line);
+
+#ifdef ITRON
+void sub1(intptr_t exinf);
+void sub2(intptr_t exinf);
+#else
+void *sub1(void *thdata);
+void *sub2(void *thdata);
+#endif
+
 
 #endif
