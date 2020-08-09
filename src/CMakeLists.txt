@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.1)
+project(testapp C)
+include_directories(include)
+add_subdirectory(sub1)
+add_subdirectory(sub2)
+add_subdirectory(linux)
+add_executable(testapp testapp.c)
+target_link_libraries(testapp Linux Sub1 Sub2 -lpthread)
