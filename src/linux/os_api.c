@@ -35,7 +35,7 @@ int init_multi_task()
 {
     int ret;
 
-    thdata = calloc(sizeof(struct thdata), 2);
+    thdata = (struct thdata*)calloc(sizeof(struct thdata), 2);
     if(thdata == NULL)
     {
         perror("calloc()");

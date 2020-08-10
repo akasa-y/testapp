@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.1)
-project(testapp C)
 include_directories(include)
 add_subdirectory(main_task)
 add_subdirectory(sub1)
