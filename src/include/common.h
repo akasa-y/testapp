@@ -35,6 +35,8 @@ int recv_mail(int mailbox_id, mail_data_u *data);
 
 int read_line(char *line);
 
+void main_task(intptr_t exinf);
+
 #ifdef ITRON
 void sub1(intptr_t exinf);
 void sub2(intptr_t exinf);
