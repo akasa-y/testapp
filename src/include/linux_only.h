@@ -2,6 +2,7 @@
 #define __LINUX_ONLY_H__
 
 #include <stdarg.h>
+#include "unistd.h"
 /*
  *  ログ情報の重要度の定義
  */

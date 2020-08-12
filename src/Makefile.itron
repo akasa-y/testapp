@@ -172,7 +172,7 @@ CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES)
 #  アプリケーションプログラムに関する定義
 #
 APPLNAME = testapp
-APPLDIRS = ../testapp ../testapp/sub1 ../testapp/sub2 ../testapp/include ../testapp/itron
+APPLDIRS = ../testapp ../testapp/main_task ../testapp/sub1 ../testapp/sub2 ../testapp/include ../testapp/itron
 APPL_CFG = testapp.cfg
 APPL_CDL = testapp.cdl
 
@@ -182,7 +182,7 @@ ifdef USE_CXX
 	APPL_CXXOBJS := testapp.o
 	APPL_COBJS :=
 else
-	APPL_COBJS := testapp.o sub1.o sub2.o os_api.o
+	APPL_COBJS := main_task.o sub1.o sub2.o os_api.o
 endif
 APPL_COBJS := $(APPL_COBJS) log_output.o vasyslog.o t_perror.o strerror.o
 APPL_CFLAGS := $(APPL_CFLAGS)
