@@ -39,36 +39,53 @@ int init_multi_task()
     if(thdata == NULL)
     {
         perror("calloc()");
-        return -1;
+        ret = -1;
+        goto err1;
     }
 
-    ret = pthread_create(&thdata[0].th, NULL, sub1, &thdata[0]);
-    ret += pthread_create(&thdata[1].th, NULL, sub2, &thdata[1]);
-    if(ret != 0)
+    if(pthread_create(&thdata[0].th, NULL, sub1, &thdata[0]) != 0)
     {
-        perror("init pthread_create");
-        return -2;
+        perror("pthread_create0");
+        ret = -2;
+        goto err2;
     }
+
+    if(pthread_create(&thdata[1].th, NULL, sub2, &thdata[1]) != 0)
+    {
+        perror("pthread_create1");
+        ret = -3;
+        goto err3;
+    }
+
     return 0;
+
+err3:
+    pthread_cancel(thdata[0].th);
+    pthread_join(thdata[0].th, NULL);
+err2:
+    free(thdata);
+    thdata = NULL;
+err1:
+    return ret;
 }
 
 int term_multi_task()
 {
     int i;
-    int ret;
+    int ret = 0;
     for(i = 0; i < 2; i++)
     {
-        ret = pthread_join(thdata[i].th, NULL);
-        if(ret != 0)
+        if(pthread_join(thdata[i].th, NULL) != 0)
         {
             printf("join err %d\n", i);
+            ret = -1;
         }
     }
 
     free(thdata);
     thdata = NULL;
 
-    return 0;
+    return ret;
 }
 
 int init_mailbox()
