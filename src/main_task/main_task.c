@@ -1,9 +1,19 @@
-//#include <stdio.h>
-//#include <stdlib.h>
+/**
+ * @file main_task.c
+ * @brief メインタスク用の処理を記述する
+ */
 #include <string.h>
-
 #include "common.h"
 
+/**
+ * @fn void main_task(intptr_t exinf)
+ * @brief メインタスクのエントリー関数
+ * @param[in] exinf 未使用
+ * @return なし
+ * 
+ * この関数でハード初期化や資源確保を行う。
+ * キーボードからの"end"を受けるまでキーボードの入力を他のタスクに送付する。
+ */
 void main_task(intptr_t exinf)
 {
     char line[32];
