@@ -5,27 +5,34 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/fcntl.h>
-#include <unistd.h>
 
 #include "common.h"
 
 /* Typedef */
+//! スレッド用の構造体
 struct thdata {
-    pthread_t th;
+    pthread_t th; //!< スレッドIDを記録する
 };
 
+//! メールボックス(mailbox_fd)にアクセスするために使用する
 enum {
-    RD = 0,
-    WR = 1
+    RD = 0, //!< READ用の配列アクセス
+    WR = 1  //!< WRITE用の配列アクセス
 };
 
 /* RAM */
-struct thdata *thdata;
-int mailbox_fd[2][2];
+struct thdata *thdata;  //!< (RAM)スレッド記録用
+int mailbox_fd[2][2];   //!< (RAM)スレッド間IFに使用するメールボックスfd
 
 /* ROM */
-const char *mailbox_filename[2] = {"/tmp/sub1_mailbox", "/tmp/sub2_mailbox"};
+const char *mailbox_filename[2] = {"/tmp/sub1_mailbox", "/tmp/sub2_mailbox"}; //!< (ROM)FIFOアクセス用ファイル
 
+/**
+ * @brief Linux用ハードウェア初期化関数
+ * @return 常に0
+ * 
+ * Linuxではハードウェア初期化はないため何もせず0を返す
+ */
 int init_hw()
 {
     return 0;

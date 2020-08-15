@@ -24,6 +24,12 @@ typedef union {
     mail_data_t mail_data;
 } mail_data_u;
 
+/**
+ * @brief ハードウェア初期化関数
+ * @return 正常時0
+ * 
+ * ハードウェア初期化する。LinuxとuITRONで異なった処理となる
+ */
 int init_hw();
 int init_multi_task();
 int term_multi_task();

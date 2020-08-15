@@ -36,6 +36,12 @@ static int init_serial()
     return 0;
 }
 
+/**
+ * @brief uITRON用ハードウェア初期化関数
+ * @return init_serialの戻り値
+ * 
+ * ハードウェア初期化する。現状シリアルポートを初期化する(タイマーはOS自身が実施)
+ */
 int init_hw()
 {
     return init_serial();
