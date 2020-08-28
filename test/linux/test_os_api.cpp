@@ -6,7 +6,7 @@ DEFINE_FFF_GLOBALS;
 extern "C"
 {
     #include "common.h"
-    #include "os_api.c"
+    #include "linux/os_api.c"
 }
 
 FAKE_VALUE_FUNC(void*, sub1, void*);

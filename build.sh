@@ -4,8 +4,7 @@ function build_test() {
     mkdir build
     cd build
     cmake ../
-    cmake --build .
-    ctest .
+    cmake --build . && ctest .
 }
 
 if [ $# = 0 ]; then
