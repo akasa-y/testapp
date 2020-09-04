@@ -8,7 +8,7 @@
             "name": "gcc - アクティブ ファイルのビルドとデバッグ",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/src/testapp",
+            "program": "${workspaceFolder}/src/build/testapp",
             "args": [ "-v"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
